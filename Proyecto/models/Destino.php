@@ -6,17 +6,17 @@ class Destinos{
     protected $nombre;
     protected $pais;
     protected $continente;
-    protected $descripcion;
+    protected $descripcion_destino;
     protected $imagen;
     protected $numero_visitas;
 
-    public function __construct($id_destino,$nombre,$pais,$continente,$descripcion,$imagen,$numero_visitas){
+    public function __construct($id_destino,$nombre,$pais,$continente,$descripcion_destino,$imagen,$numero_visitas){
 
         $this->id_destino=$id_destino;
         $this->nombre=$nombre;
         $this->pais=$pais;
         $this->continente=$continente;
-        $this->descripcion=$descripcion;
+        $this->descripcion_destino=$descripcion_destino;
         $this->imagen=$imagen;
         $this->numero_visitas=$numero_visitas;
     }
@@ -37,7 +37,7 @@ class Destinos{
     {
         $this->id_destino = $id_destino;
 
-        
+        return $this;
     }
 
     /**
@@ -95,21 +95,20 @@ class Destinos{
     }
 
     /**
-     * Get the value of descripcion
+     * Get the value of descripcion_destino
      */
-    public function getDescripcion()
+    public function getDescripcionDestino()
     {
-        return $this->descripcion;
+        return $this->descripcion_destino;
     }
 
     /**
-     * Set the value of descripcion
+     * Set the value of descripcion_destino
      */
-    public function setDescripcion($descripcion)
+    public function setDescripcionDestino($descripcion_destino)
     {
-        $this->descripcion = $descripcion;
+        $this->descripcion_destino = $descripcion_destino;
 
-      
     }
 
     /**
