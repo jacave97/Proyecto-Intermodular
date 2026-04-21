@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Ayuda al Viajero</title>
-    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="estilos.css">
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
 </head>
 
 <body>
@@ -17,31 +20,54 @@
     <a href="#">Inicio</a>
     <a href="#">Destinos</a>
     <a href="#">Favoritos</a>
-    <a href="#">Antes de Viajar</a>
+    <a href="#">Sugerencias</a>
     <a href="#">Reseñas</a>
 </nav>
 
 <section>
     <h2 class="titulo">Destinos populares</h2>
 
-    <div class="grid">
+    <!-- CARRUSEL -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
 
-        <div class="card-img">
-            <img src="imagenes/ginebra.jpg" alt="Ginebra">
-            <div class="overlay">20 lugares que ver en Ginebra imprescindibles</div>
+            <div class="swiper-slide">
+                <img src="imagenes/ginebra.jpg" alt="Ginebra">
+                <span class="carrusel-title-wrapper">
+                    <span class="carrusel-title">Ginebra</span>
+                </span>
+                <div class="swiper-slide-footer">
+                    <p>20 lugares imprescindibles</p>
+                </div>
+            </div>
+
+            <div class="swiper-slide">
+                <img src="imagenes/zurich.jpg" alt="Zúrich">
+                <span class="carrusel-title-wrapper">
+                    <span class="carrusel-title">Zúrich</span>
+                </span>
+                <div class="swiper-slide-footer">
+                    <p>Guía completa de la ciudad</p>
+                </div>
+            </div>
+
+            <div class="swiper-slide">
+                <img src="imagenes/estocolmo.jpg" alt="Estocolmo">
+                <span class="carrusel-title-wrapper">
+                    <span class="carrusel-title">Estocolmo</span>
+                </span>
+                <div class="swiper-slide-footer">
+                    <p>Restaurantes recomendados</p>
+                </div>
+            </div>
+
         </div>
 
-        <div class="card-img">
-            <img src="imagenes/zurich.jpg" alt="Zúrich">
-            <div class="overlay">20 lugares que ver en Zúrich imprescindibles</div>
-        </div>
-
-        <div class="card-img">
-            <img src="imagenes/estocolmo.jpg" alt="Estocolmo">
-            <div class="overlay">Dónde comer en Estocolmo: 10 restaurantes recomendados</div>
-        </div>
-
+        <!-- Flechas -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
     </div>
+
 </section>
 
 <section>
@@ -75,6 +101,21 @@
 <footer>
     <p>Proyecto Ayuda al Viajero © 2026</p>
 </footer>
+
+<!-- SWIPER JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+<script>
+const swiper = new Swiper('.swiper-container', {
+    loop: true,
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+    slidesPerView: 1,
+    spaceBetween: 10
+});
+</script>
 
 </body>
 </html>
