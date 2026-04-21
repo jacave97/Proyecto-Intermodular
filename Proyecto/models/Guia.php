@@ -2,14 +2,14 @@
 class Guia{
     protected $idGuias;
     protected $titulo;
-    protected $comentario;
+    protected $comentario_guia;
     protected $usuario_id;
     protected $destino_id;
 
-    public  function __construct($idGuias,$titulo,$comentario,$usuario_id,$destino_id){
+    public  function __construct($idGuias,$titulo,$comentario_guia,$usuario_id,$destino_id){
         $this->idGuias=$idGuias;
         $this->titulo=$titulo;
-        $this->comentario=$comentario;
+        $this->comentario_guia=$comentario_guia;
         $this->usuario_id=$usuario_id;
         $this->destino_id=$destino_id;
     }
@@ -50,22 +50,22 @@ class Guia{
         
     }
 
+
     /**
-     * Get the value of comentario
+     * Get the value of comentario_guia
      */
-    public function getComentario()
+    public function getComentarioGuia()
     {
-        return $this->comentario;
+        return $this->comentario_guia;
     }
 
     /**
-     * Set the value of comentario
+     * Set the value of comentario_guia
      */
-    public function setComentario($comentario)
+    public function setComentarioGuia($comentario_guia)
     {
-        $this->comentario = $comentario;
+        $this->comentario_guia = $comentario_guia;
 
-        
     }
 
     /**
