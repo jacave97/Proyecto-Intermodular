@@ -1,0 +1,7 @@
+{
+    "host":"db",
+    "userName":"root",
+    "password":"test",
+    "db":"ayuda_al_viajero"
+
+}
