@@ -26,7 +26,7 @@ class GuiaController {
             $exito = $this->gestor->crearGuia($guia);
  
             if ($exito) {
-                header("Location: index.php?mensaje=guia_creada");
+                header("Location: /Proyecto/index.php?mensaje=guia_creada");
                 exit;
             } else {
                 $error = "Error al guardar la guía.";
@@ -50,7 +50,7 @@ class GuiaController {
             $exito = $this->gestor->crearGuia($guia);
  
             if ($exito) {
-                header("Location: index.php?mensaje=guia_creada");
+                header("Location: /Proyecto/index.php?mensaje=guia_creada");
                 exit;
             } else {
                 $error = "Error al guardar la guía.";
@@ -68,7 +68,7 @@ class GuiaController {
             $exito = $this->gestor->eliminarGuia($id);
  
             if ($exito) {
-                header("Location: index.php?mensaje=guia_eliminada");
+                header("Location: /Proyecto/index.php?mensaje=guia_eliminada");
                 exit;
             } else {
                 echo "Error al intentar eliminar la guía.";
