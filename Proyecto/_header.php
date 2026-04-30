@@ -16,9 +16,12 @@
  
 <nav>
     <a href="index.php">Inicio</a>
-    <a href="index.php?accion=crearGuiaGastro">Guía Gastronómica</a>
-    <a href="index.php?accion=crearGuiaRuta">Guía de Ruta</a>
+    
+    <!-- Unificamos los dos enlaces anteriores en uno solo -->
+    <a href="index.php?accion=crearGuia">Guia</a>
+    
     <a href="index.php?accion=reseñas">Reseñas</a>
+    
     <?php if (isset($_SESSION['usuario_nombre'])): ?>
         <span style="color:white; margin: 10px;">Hola, <?= $_SESSION['usuario_nombre'] ?></span>
         <a href="index.php?accion=logout">Cerrar sesión</a>
