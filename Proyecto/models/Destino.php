@@ -1,22 +1,22 @@
 <?php
 
-class Destinos{
+class Destino{
 
     protected $id_destino;
     protected $nombre;
     protected $pais;
     protected $continente;
-    protected $descripcion_destino;
+    protected $descripcion;
     protected $imagen;
     protected $numero_visitas;
 
-    public function __construct($id_destino,$nombre,$pais,$continente,$descripcion_destino,$imagen,$numero_visitas){
+    public function __construct($id_destino,$nombre,$pais,$continente,$descripcion,$imagen,$numero_visitas){
 
         $this->id_destino=$id_destino;
         $this->nombre=$nombre;
         $this->pais=$pais;
         $this->continente=$continente;
-        $this->descripcion_destino=$descripcion_destino;
+        $this->descripcion=$descripcion;
         $this->imagen=$imagen;
         $this->numero_visitas=$numero_visitas;
     }
@@ -97,17 +97,17 @@ class Destinos{
     /**
      * Get the value of descripcion_destino
      */
-    public function getDescripcionDestino()
+    public function getDescripcion()
     {
-        return $this->descripcion_destino;
+        return $this->descripcion;
     }
 
     /**
      * Set the value of descripcion_destino
      */
-    public function setDescripcionDestino($descripcion_destino)
+    public function setDescripcion($descripcion)
     {
-        $this->descripcion_destino = $descripcion_destino;
+        $this->descripcion = $descripcion;
 
     }
 
