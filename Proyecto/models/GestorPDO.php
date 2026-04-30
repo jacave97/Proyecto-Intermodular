@@ -1,37 +1,43 @@
 <?php
- 
-class GestorPDO extends Connection {
- 
-    public function __construct() {
+
+class GestorPDO extends Connection
+{
+
+    public function __construct()
+    {
         parent::__construct();
     }
- 
+
     // =====================
     // USUARIOS
     // =====================
- 
-    public function registrarUsuario(Usuario $usuario) {
+
+    public function registrarUsuario(Usuario $usuario)
+    {
         try {
             $sql = "INSERT INTO USUARIOS (nombre, email, contraseña, rol) 
-                    VALUES (:nombre, :email, :contrasena, :rol)";
+                VALUES (:nombre, :email, :pass, :rol)";
             $stmt = $this->getConn()->prepare($sql);
-            $stmt->bindValue(':nombre',     $usuario->getNombre());
-            $stmt->bindValue(':email',      $usuario->getEmail());
-            $stmt->bindValue(':contrasena', $usuario->getPassword());
-            $stmt->bindValue(':rol',        $usuario->getRol());
+            $stmt->bindValue(':nombre', $usuario->getNombre());
+            $stmt->bindValue(':email',  $usuario->getEmail());
+            $stmt->bindValue(':pass',   $usuario->getPassword());
+            $stmt->bindValue(':rol',    $usuario->getRol());
             return $stmt->execute();
         } catch (PDOException $e) {
-            echo $e->getMessage();
+            // En lugar de echo, podrías registrar el error en un log
+            error_log($e->getMessage());
+            return false; // Devolvemos false para manejarlo en el Controller
         }
     }
- 
-    public function buscarUsuarioPorEmail($email) {
+
+    public function buscarUsuarioPorEmail($email)
+    {
         $sql = "SELECT * FROM USUARIOS WHERE email = :email";
         $stmt = $this->getConn()->prepare($sql);
         $stmt->bindValue(':email', $email);
         $stmt->execute();
         $fila = $stmt->fetch(PDO::FETCH_ASSOC);
- 
+
         if ($fila) {
             return new Usuario(
                 $fila['Id_usuario'],
@@ -43,16 +49,17 @@ class GestorPDO extends Connection {
         }
         return null;
     }
- 
+
     // =====================
     // DESTINOS
     // =====================
- 
-    public function listarDestinos() {
+
+    public function listarDestinos()
+    {
         $sql  = "SELECT * FROM DESTINOS";
         $rtdo = $this->getConn()->query($sql);
         $arrayDestinos = [];
- 
+
         while ($fila = $rtdo->fetch(PDO::FETCH_ASSOC)) {
             $arrayDestinos[] = new Destinos(
                 $fila['Id_Destinos'],
@@ -66,15 +73,16 @@ class GestorPDO extends Connection {
         }
         return $arrayDestinos;
     }
- 
+
     // =====================
     // GUIAS
     // =====================
- 
-    public function crearGuia(Guia $guia) {
+
+    public function crearGuia(Guia $guia)
+    {
         try {
             $this->getConn()->beginTransaction();
- 
+
             // 1. Insertar en GUIAS
             $sql = "INSERT INTO GUIAS (destinos_id, usuario_id, Titulo, Comentario) 
                     VALUES (:destinos_id, :usuario_id, :titulo, :comentario)";
@@ -84,9 +92,9 @@ class GestorPDO extends Connection {
             $stmt->bindValue(':titulo',      $guia->getTitulo());
             $stmt->bindValue(':comentario',  $guia->getComentarioGuia());
             $stmt->execute();
- 
+
             $idGuia = $this->getConn()->lastInsertId();
- 
+
             // 2. Insertar en la tabla específica según el tipo
             if ($guia instanceof GuiaGastronomica) {
                 $sql2 = "INSERT INTO GUIAS_GASTRONOMICAS (Id_guias, precio_medio, tipo_comida) 
@@ -96,7 +104,6 @@ class GestorPDO extends Connection {
                 $stmt2->bindValue(':precio', $guia->getPrecioMedio());
                 $stmt2->bindValue(':tipo',   $guia->getTipoComida());
                 $stmt2->execute();
- 
             } elseif ($guia instanceof GuiaRuta) {
                 $sql2 = "INSERT INTO GUIAS_RUTA (Id_guias, distancia_km, Dificultad) 
                          VALUES (:id, :distancia, :dificultad)";
@@ -106,53 +113,53 @@ class GestorPDO extends Connection {
                 $stmt2->bindValue(':dificultad',  $guia->getDificultad());
                 $stmt2->execute();
             }
- 
+
             $this->getConn()->commit();
             return true;
- 
         } catch (PDOException $e) {
             $this->getConn()->rollBack();
             echo $e->getMessage();
             return false;
         }
     }
- 
-    public function eliminarGuia($id) {
+
+    public function eliminarGuia($id)
+    {
         try {
             $this->getConn()->beginTransaction();
- 
+
             // Primero eliminamos la tabla específica (por la FK)
             $sql1 = "DELETE FROM GUIAS_GASTRONOMICAS WHERE Id_guias = :id";
             $stmt1 = $this->getConn()->prepare($sql1);
             $stmt1->bindValue(':id', $id);
             $stmt1->execute();
- 
+
             $sql2 = "DELETE FROM GUIAS_RUTA WHERE Id_guias = :id";
             $stmt2 = $this->getConn()->prepare($sql2);
             $stmt2->bindValue(':id', $id);
             $stmt2->execute();
- 
+
             // Luego eliminamos de GUIAS
             $sql3 = "DELETE FROM GUIAS WHERE Id_guias = :id";
             $stmt3 = $this->getConn()->prepare($sql3);
             $stmt3->bindValue(':id', $id);
             $stmt3->execute();
- 
+
             $this->getConn()->commit();
             return true;
- 
         } catch (PDOException $e) {
             $this->getConn()->rollBack();
             echo $e->getMessage();
             return false;
         }
     }
- 
+
     // =====================
     // RESEÑAS
     // =====================
- 
-    public function crearReseña(Resena $reseña) {
+
+    public function crearReseña(Resena $reseña)
+    {
         try {
             $sql = "INSERT INTO RESEÑAS (destinos_id, usuario_id, Comentarios, Valoración) 
                     VALUES (:destinos_id, :usuario_id, :comentario, :valoracion)";
@@ -167,12 +174,13 @@ class GestorPDO extends Connection {
             return false;
         }
     }
- 
+
     // =====================
     // FOTOS
     // =====================
- 
-    public function subirFoto(Foto $foto) {
+
+    public function subirFoto(Foto $foto)
+    {
         try {
             $sql = "INSERT INTO FOTOS (reseña_id, usuario_id, Url, descripcion) 
                     VALUES (:resena_id, :usuario_id, :url, :descripcion)";

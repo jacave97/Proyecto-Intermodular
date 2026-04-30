@@ -1,17 +1,17 @@
 <?php
 
 class reseña{
-    protected $id_resena;
+    protected $id_reseña;
     protected $destino_id;
     protected $usuario_id;
     protected $comentario_reseña;
     protected $valoracion;
 
-    public function __construct($id_resena,$destino_id,$usuario_id,$comentario_reseña,$valoracion){
+    public function __construct($id_reseña,$destino_id,$usuario_id,$comentario_reseña,$valoracion){
         $this->id_reseña=$id_reseña;
         $this->destino_id=$destino_id;
         $this->usuario_id=$usuario_id;
-        $this->comentario_reseña=$comentario_resena;
+        $this->comentario_reseña=$comentario_reseña;
         $this->valoracion=$valoracion;
        
     }

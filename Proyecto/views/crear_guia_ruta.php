@@ -8,7 +8,7 @@
     <?php endif; ?>
  
     <div class="form-container">
-        <form method="POST" action="/Proyecto/index.php?accion=crearGuiaRuta">
+        <form method="POST" action="index.php?accion=crearGuiaRuta">
  
             <div class="form-group">
                 <label for="titulo">Título</label>

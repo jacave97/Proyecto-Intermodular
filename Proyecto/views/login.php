@@ -8,7 +8,7 @@
     <?php endif; ?>
  
     <div class="form-container">
-        <form method="POST" action="/Proyecto/index.php?accion=login">
+        <form method="POST" action="index.php?accion=login">
  
             <div class="form-group">
                 <label for="email">Email</label>
