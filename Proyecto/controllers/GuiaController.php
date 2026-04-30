@@ -20,13 +20,16 @@ class GuiaController {
             $comentario_guia = $_POST['comentario_guia'];
             $usuario_id      = $_SESSION['usuario_id'];
             $destino_id      = $_POST['destino_id'];
+
+            $precio_medio = $_POST['precio_medio'];
+            $tipo_comida = $_POST['tipo_comida'];
  
-            $guia = new GuiaGastronomica(null, $titulo, $comentario_guia, $usuario_id, $destino_id);
+            $guia = new GuiaGastronomica(null, $titulo, $comentario_guia, $usuario_id, $destino_id, $precio_medio, $tipo_comida);
  
             $exito = $this->gestor->crearGuia($guia);
  
             if ($exito) {
-                header("Location: /Proyecto/index.php?mensaje=guia_creada");
+                header("Location: index.php?mensaje=guia_creada");
                 exit;
             } else {
                 $error = "Error al guardar la guía.";
@@ -44,13 +47,16 @@ class GuiaController {
             $comentario_guia = $_POST['comentario_guia'];
             $usuario_id      = $_SESSION['usuario_id'];
             $destino_id      = $_POST['destino_id'];
+
+            $distancia_km = $_POST['distancia_km'];
+            $dificultad = $_POST['dificultad'];
  
-            $guia = new GuiaRuta(null, $titulo, $comentario_guia, $usuario_id, $destino_id);
+            $guia = new GuiaRuta(null, $titulo, $comentario_guia, $usuario_id, $destino_id, $distancia_km, $dificultad );
  
             $exito = $this->gestor->crearGuia($guia);
  
             if ($exito) {
-                header("Location: /Proyecto/index.php?mensaje=guia_creada");
+                header("Location: index.php?mensaje=guia_creada");
                 exit;
             } else {
                 $error = "Error al guardar la guía.";
@@ -68,7 +74,7 @@ class GuiaController {
             $exito = $this->gestor->eliminarGuia($id);
  
             if ($exito) {
-                header("Location: /Proyecto/index.php?mensaje=guia_eliminada");
+                header("Location: index.php?mensaje=guia_eliminada");
                 exit;
             } else {
                 echo "Error al intentar eliminar la guía.";
