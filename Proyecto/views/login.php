@@ -24,7 +24,7 @@
  
         </form>
  
-        <p class="form-link">¿No tienes cuenta? <a href="../index.php?accion=registro">Regístrate</a></p>
+        <p class="form-link">¿No tienes cuenta? <a href="index.php?accion=registro">Regístrate</a></p>
     </div>
 </section>
  
