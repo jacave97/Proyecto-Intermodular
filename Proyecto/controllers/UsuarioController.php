@@ -21,7 +21,7 @@ class UsuarioController {
  
             $this->gestor->registrarUsuario($nuevoUsuario);
  
-            header("Location: /Proyecto/index.php?accion=login");
+            header("Location: index.php?accion=login");
             exit;
         }
  
@@ -43,7 +43,7 @@ class UsuarioController {
                 $_SESSION['usuario_email']  = $usuario->getEmail();
                 $_SESSION['usuario_rol']    = $usuario->getRol();
  
-                header("Location: /Proyecto/index.php");
+                header("Location: index.php");
                 exit;
  
             } else {
@@ -58,7 +58,7 @@ class UsuarioController {
  
     public function logout() {
         session_destroy();
-        header("Location: /Proyecto/index.php?accion=login");
+        header("Location: index.php?accion=login");
         exit;
     }
 }
