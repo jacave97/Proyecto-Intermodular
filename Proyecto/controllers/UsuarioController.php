@@ -16,12 +16,12 @@ public function registro() {
         $nombre        = $_POST['nombre'];
         $email         = $_POST['email'];
         $passwordPlana = $_POST['password'];
- 
+        $rol           = $_POST['rol'] ?? 'usuario';
 
         $passwordHash = password_hash($passwordPlana, PASSWORD_DEFAULT);
  
 
-        $nuevoUsuario = new Usuario(null, $nombre, $email, $passwordHash, 'usuario');
+        $nuevoUsuario = new Usuario(null, $nombre, $email, $passwordHash, $rol);
  
         $exito = $this->gestor->registrarUsuario($nuevoUsuario);
  
