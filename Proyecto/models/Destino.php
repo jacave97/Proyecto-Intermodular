@@ -7,18 +7,16 @@ class Destino{
     protected $pais;
     protected $continente;
     protected $descripcion;
-    protected $imagen;
-    protected $numero_visitas;
 
-    public function __construct($id_destino,$nombre,$pais,$continente,$descripcion,$imagen,$numero_visitas){
+
+    public function __construct($id_destino,$nombre,$pais,$continente,$descripcion){
 
         $this->id_destino=$id_destino;
         $this->nombre=$nombre;
         $this->pais=$pais;
         $this->continente=$continente;
         $this->descripcion=$descripcion;
-        $this->imagen=$imagen;
-        $this->numero_visitas=$numero_visitas;
+
     }
     
 
@@ -111,39 +109,4 @@ class Destino{
 
     }
 
-    /**
-     * Get the value of imagen
-     */
-    public function getImagen()
-    {
-        return $this->imagen;
-    }
-
-    /**
-     * Set the value of imagen
-     */
-    public function setImagen($imagen)
-    {
-        $this->imagen = $imagen;
-
-        
-    }
-
-    /**
-     * Get the value of numero_visitas
-     */
-    public function getNumeroVisitas()
-    {
-        return $this->numero_visitas;
-    }
-
-    /**
-     * Set the value of numero_visitas
-     */
-    public function setNumeroVisitas($numero_visitas)
-    {
-        $this->numero_visitas = $numero_visitas;
-
-        
-    }
 }
