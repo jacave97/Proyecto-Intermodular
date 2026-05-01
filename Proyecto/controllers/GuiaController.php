@@ -26,7 +26,7 @@ class GuiaController
         $tipo = $_POST['tipo_guia'] ?? null;
         $arrayDestinos = $this->gestor->listarDestinos();
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btGuardar'])) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['botonGuardar'])) {
 
             $comunes = [
                 'titulo' => $_POST['titulo'],

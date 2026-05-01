@@ -42,7 +42,7 @@
         </select><br>
 
         <br>
-        <button type="submit" >Registrar Guía</button>
+        <button type="submit" name="botonGuardar" >Registrar Guía</button>
     </form>
 </div>
 
