@@ -3,10 +3,6 @@
 <section>
     <h2 class="titulo">Crear cuenta</h2>
 
-    <?php if (isset($error)): ?>
-        <p class="error"><?= $error ?></p>
-    <?php endif; ?>
-
     <div class="form-container">
         <form method="POST" action="index.php?accion=registro">
             <div class="form-group">
@@ -24,11 +20,19 @@
                 <input type="password" id="password" name="password" placeholder="Tu contraseña" required>
             </div>
 
-            <button type="submit" class="btn-primary">Registrarse</button>
+            <!-- Selector de Rol abierto para todos -->
+            <div class="form-group">
+                <label for="rol">Tipo de cuenta</label>
+                <select name="rol" id="rol">
+                    <option value="usuario">Usuario</option>
+                    <option value="admin">Administrador</option>
+                </select>
+            </div>
 
+            <button type="submit" class="btn-primary">Registrarse</button>
         </form>
 
-        <p class="form-link">¿Ya tienes cuenta? <a href="../index.php?accion=login">Inicia sesión</a></p>
+        <p class="form-link">¿Ya tienes cuenta? <a href="index.php?accion=login">Inicia sesión</a></p>
     </div>
 </section>
 
