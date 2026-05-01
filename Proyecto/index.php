@@ -19,20 +19,20 @@ if (in_array($accion, $accionesProtegidas) && !isset($_SESSION['usuario_id'])) {
 
 switch ($accion) {
 
-    // --- Usuario ---
+    //USUARIO
     case 'login':
-        $usuarioController->login();
+        $controller->login();
         break;
 
     case 'registro':
-        $usuarioController->registro();
+        $controller->registro();
         break;
 
     case 'logout':
-        $usuarioController->logout();
+        $controller->logout();
         break;
 
-    // --- Guías ---
+    //GUIAS
     case 'crearGuia':
         $controller->crearGuia();
         break;
@@ -43,6 +43,34 @@ switch ($accion) {
 
     case 'eliminarGuia':
         $controller->eliminarGuia();
+        break;
+    case 'borrarGuia':
+        $controller->borrarGuia();
+        break;
+    case 'editarGuia':
+        $controller->editarGuia();
+        break;
+
+    // RESEÑAS
+    case 'reseñas':
+        $controller->mostrarReseñas();
+        break;
+    case 'guardarReseña':
+        $controller->guardarReseña();
+        break;
+    case 'borrarReseña':
+        $controller->borrarReseña();
+        break;
+    case 'editarReseña':
+        $controller->editarReseña();
+        break;
+    // DESTINO
+
+    case 'borrarDestino':
+        $controller->borrarDestino();
+        break;
+    case 'editarDestino':
+        $controller->editarDestino();
         break;
 
     // --- Página principal ---
