@@ -1,63 +1,104 @@
 <?php include __DIR__ . "/../_header.php"; ?>
- 
+
 <section>
-    <h2 class="titulo">Destinos populares</h2>
- 
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
- 
-            <?php foreach ($arrayDestinos as $destino): ?>
-                <div class="swiper-slide">
-                    <img src="imagenes/<?= $destino->getImagen() ?>" alt="<?= $destino->getNombre() ?>">
-                    <span class="carrusel-title-wrapper">
-                        <span class="carrusel-title"><?= $destino->getNombre() ?></span>
-                    </span>
-                    <div class="swiper-slide-footer">
-                        <p><?= $destino->getDescripcion() ?></p>
-                    </div>
-                </div>
-            <?php endforeach; ?>
- 
-        </div>
- 
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-    </div>
+    <h2>Destinos disponibles</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>País</th>
+                <th>Continente</th>
+                <th>Descripción</th>
+                <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?><th>Acciones</th><?php endif; ?>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if (empty($arrayDestinos)): ?>
+                <tr><td colspan="5">No hay destinos registrados.</td></tr>
+            <?php else: ?>
+                <?php foreach ($arrayDestinos as $destino): ?>
+                    <tr>
+                        <td><strong><?= $destino->getNombre() ?></strong></td>
+                        <td><?= $destino->getPais() ?></td>
+                        <td><?= $destino->getContinente() ?></td>
+                        <td><?= $destino->getDescripcion() ?></td>
+                        <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?>
+                            <td>
+                                <a href="index.php?accion=editarDestino&id=<?= $destino->getIdDestino() ?>">Editar</a> | 
+                                <a href="index.php?accion=borrarDestino&id=<?= $destino->getIdDestino() ?>">Borrar</a>
+                            </td>
+                        <?php endif; ?>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </tbody>
+    </table>
 </section>
- 
+
+<hr>
+
 <section>
-    <h2 class="titulo">Antes de viajar</h2>
- 
-    <div class="grid-viaje">
-        <div class="card-viaje">
-            <h3>🧳 Equipaje</h3>
-            <p>Checklist de lo que debes llevar en tu maleta</p>
-        </div>
-        <div class="card-viaje">
-            <h3>📄 Documentos</h3>
-            <p>Pasaporte, visados y requisitos importantes</p>
-        </div>
-        <div class="card-viaje">
-            <h3>💱 Divisa</h3>
-            <p>Información sobre cambio de moneda</p>
-        </div>
-        <div class="card-viaje">
-            <h3>💡 Consejos</h3>
-            <p>Recomendaciones útiles para tu viaje</p>
-        </div>
-    </div>
+    <h2>Guías Gastronómicas</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Destino</th>
+                <th>Comentario</th>
+                <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?><th>Acciones</th><?php endif; ?>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if (empty($guiasGastro)): ?>
+                <tr><td colspan="4">No hay guías gastronómicas todavía.</td></tr>
+            <?php else: ?>
+                <?php foreach ($guiasGastro as $guia): ?>
+                    <tr>
+                        <td><?= $guia['Titulo'] ?></td>
+                        <td><?= $guia['nombre_destino'] ?></td>
+                        <td><?= $guia['Comentario'] ?></td>
+                        <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?>
+                            <td>
+                                <a href="index.php?accion=editarGuia&id=<?= $guia['Id_guias'] ?>">Editar</a> | 
+                                <a href="index.php?accion=borrarGuia&id=<?= $guia['Id_guias'] ?>">Borrar</a>
+                            </td>
+                        <?php endif; ?>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </tbody>
+    </table>
+
+    <h2>Guías de Ruta</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Destino</th>
+                <th>Comentario</th>
+                <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?><th>Acciones</th><?php endif; ?>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if (empty($guiasRutas)): ?>
+                <tr><td colspan="4">No hay guías de ruta todavía.</td></tr>
+            <?php else: ?>
+                <?php foreach ($guiasRutas as $guia): ?>
+                    <tr>
+                        <td><?= $guia['Titulo'] ?></td>
+                        <td><?= $guia['nombre_destino'] ?></td>
+                        <td><?= $guia['Comentario'] ?></td>
+                        <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?>
+                            <td>
+                                <a href="index.php?accion=editarGuia&id=<?= $guia['Id_guias'] ?>">Editar</a> | 
+                                <a href="index.php?accion=borrarGuia&id=<?= $guia['Id_guias'] ?>">Borrar</a>
+                            </td>
+                        <?php endif; ?>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </tbody>
+    </table>
 </section>
- 
+
 <?php include __DIR__ . "/../_footer.php"; ?>
- 
-<script>
-const swiper = new Swiper('.swiper-container', {
-    loop: true,
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-    slidesPerView: 1,
-    spaceBetween: 10
-});
-</script>

@@ -177,7 +177,7 @@ class GuiaController
         header("Location: index.php");
         exit;
     }
-    // --- CONTROLADOR DESTINOS ---
+    //Destinos
     public function borrarDestino()
     {
         if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin') {
@@ -211,7 +211,7 @@ class GuiaController
         }
     }
 
-    // --- CONTROLADOR GUÍAS ---
+    // Guias
     public function borrarGuia()
     {
         if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin') {
