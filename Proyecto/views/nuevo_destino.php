@@ -1,6 +1,6 @@
 <?php include __DIR__ . "/../_header.php"; ?>
 <div>
-    <h2>Añadir Nuevo Destino</h2>
+    <h2>Añade a Que destinos has viajado</h2>
     <form action="index.php?accion=nuevoDestino" method="POST" enctype="multipart/form-data">
         <input type="text" name="nombre_destino" placeholder="Nombre de la ciudad" required><br>
         <input type="text" name="pais_destino" placeholder="País" required><br>
