@@ -15,18 +15,16 @@
 </header>
  
 <nav>
-    <a href="index.php">Inicio</a>
-    
-    <!-- Unificamos los dos enlaces anteriores en uno solo -->
-    <a href="index.php?accion=crearGuia">Guia</a>
-    <a href="index.php?accion=nuevoDestino">Destinos</a>
-    <a href="index.php?accion=reseñas">Reseñas</a>
-    
-    <?php if (isset($_SESSION['usuario_nombre'])): ?>
-        <span style="color:white; margin: 10px;">Hola, <?= $_SESSION['usuario_nombre'] ?></span>
-        <a href="index.php?accion=logout">Cerrar sesión</a>
-    <?php else: ?>
-        <a href="index.php?accion=login">Iniciar sesión</a>
-        <a href="index.php?accion=registro">Registrarse</a>
-    <?php endif; ?>
-</nav>
+            <!-- Enlaces públicos -->
+            <a href="index.php">Inicio</a> | 
+            <a href="index.php?accion=reseñas">Reseñas</a> | 
+
+            <!-- Enlaces y acciones privadas -->
+            <?php if (isset($_SESSION['usuario_id'])): ?>
+                <a href="index.php?accion=crearGuia">Añadir Guía</a> | 
+                <a href="index.php?accion=nuevoDestino">Añadir Destino</a> | 
+                <a href="index.php?accion=logout">Cerrar sesión</a>
+            <?php else: ?>
+                <a href="index.php?accion=login">Iniciar sesión / Registrarse</a>
+            <?php endif; ?>
+        </nav>
