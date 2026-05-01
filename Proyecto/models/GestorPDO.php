@@ -78,7 +78,7 @@ class GestorPDO extends Connection
             $stmt->bindValue(':continente',  $continente);
             $stmt->bindValue(':descripcion', $descripcion);
             $stmt->bindValue(':imagen',      $imagen);
-            
+
             return $stmt->execute();
         } catch (PDOException $e) {
             error_log($e->getMessage());
@@ -86,7 +86,7 @@ class GestorPDO extends Connection
         }
     }
 
-    // --- GUIAS (Mantener igual que en source 19) ---
+    // --- GUIAS 
     public function crearGuia(Guia $guia)
     {
         try {
@@ -122,6 +122,48 @@ class GestorPDO extends Connection
         } catch (PDOException $e) {
             $this->getConn()->rollBack();
             die("Error en crearGuia: " . $e->getMessage());
+        }
+    }
+
+    public function listarGuias()
+    {
+        try {
+            $sql = "SELECT GUIAS.*, DESTINOS.nombre AS nombre_destino 
+                FROM GUIAS 
+                INNER JOIN DESTINOS ON GUIAS.destinos_id = DESTINOS.Id_Destinos";
+
+            $rtdo = $this->getConn()->query($sql);
+            $guias = [];
+
+            while ($fila = $rtdo->fetch(PDO::FETCH_ASSOC)) {
+                $guias[] = $fila;
+            }
+            return $guias;
+        } catch (PDOException $e) {
+            error_log("Error en listarGuias: " . $e->getMessage());
+            return [];
+        }
+    }
+
+    // RESEÑAS
+    public function listarReseñas()
+    {
+        try {
+
+            $sql = "SELECT RESEÑAS.*, USUARIOS.nombre AS autor_nombre 
+                FROM RESEÑAS 
+                INNER JOIN USUARIOS ON RESEÑAS.usuario_id = USUARIOS.Id_usuario";
+
+            $rtdo = $this->getConn()->query($sql);
+            $reseñas = [];
+
+            while ($fila = $rtdo->fetch(PDO::FETCH_ASSOC)) {
+                $reseñas[] = $fila;
+            }
+            return $reseñas;
+        } catch (PDOException $e) {
+            error_log("Error en listarReseñas: " . $e->getMessage());
+            return [];
         }
     }
 }
