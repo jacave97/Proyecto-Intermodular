@@ -7,7 +7,7 @@ class GestorPDO extends Connection
         parent::__construct();
     }
 
-    // --- USUARIOS ---
+    //  USUARIOS 
     public function registrarUsuario(Usuario $usuario)
     {
         try {
@@ -44,7 +44,7 @@ class GestorPDO extends Connection
         return null;
     }
 
-    // --- DESTINOS ---
+    //  DESTINOS 
     public function listarDestinos()
     {
         $sql  = "SELECT * FROM DESTINOS";
@@ -52,32 +52,27 @@ class GestorPDO extends Connection
         $arrayDestinos = [];
 
         while ($fila = $rtdo->fetch(PDO::FETCH_ASSOC)) {
-            // Verifica que dentro de Destino.php la clase sea "class Destino"[cite: 12, 19]
             $arrayDestinos[] = new Destino(
                 $fila['Id_Destinos'],
                 $fila['nombre'],
                 $fila['país'],
                 $fila['continente'],
                 $fila['descripción'],
-                $fila['imagen'],
-                $fila['numero_visitas']
             );
         }
         return $arrayDestinos;
     }
-
-    public function insertarDestinoDirecto($nombre, $pais, $continente, $descripcion, $imagen)
+    public function insertarDestinoDirecto($nombre, $pais, $continente, $descripcion)
     {
         try {
-            $sql = "INSERT INTO DESTINOS (nombre, país, continente, descripción, imagen, numero_visitas) 
-                VALUES (:nombre, :pais, :continente, :descripcion, :imagen, 0)";
+            $sql = "INSERT INTO DESTINOS (nombre, país, continente, descripción) 
+                VALUES (:nombre, :pais, :continente, :descripcion)";
 
             $stmt = $this->getConn()->prepare($sql);
             $stmt->bindValue(':nombre',      $nombre);
             $stmt->bindValue(':pais',        $pais);
             $stmt->bindValue(':continente',  $continente);
             $stmt->bindValue(':descripcion', $descripcion);
-            $stmt->bindValue(':imagen',      $imagen);
 
             return $stmt->execute();
         } catch (PDOException $e) {
@@ -145,14 +140,46 @@ class GestorPDO extends Connection
         }
     }
 
+    public function listarGuiasGastronomicas()
+    {
+        $sql = "SELECT GUIAS.*, DESTINOS.nombre AS nombre_destino 
+                FROM GUIAS 
+                INNER JOIN DESTINOS ON GUIAS.destinos_id = DESTINOS.Id_Destinos
+                INNER JOIN GUIA_GASTRONOMICA ON GUIAS.Id_guias = GUIA_GASTRONOMICA.Id_guias";
+
+        $rtdo = $this->getConn()->query($sql);
+        $guias = [];
+        while ($fila = $rtdo->fetch(PDO::FETCH_ASSOC)) {
+            $guias[] = $fila;
+        }
+        return $guias;
+    }
+
+    public function listarGuiasRutas()
+    {
+        $sql = "SELECT GUIAS.*, DESTINOS.nombre AS nombre_destino 
+                FROM GUIAS 
+                INNER JOIN DESTINOS ON GUIAS.destinos_id = DESTINOS.Id_Destinos
+                INNER JOIN GUIA_RUTA ON GUIAS.Id_guias = GUIA_RUTA.Id_guias";
+
+        $rtdo = $this->getConn()->query($sql);
+        $guias = [];
+        while ($fila = $rtdo->fetch(PDO::FETCH_ASSOC)) {
+            $guias[] = $fila;
+        }
+        return $guias;
+    }
+
     // RESEÑAS
     public function listarReseñas()
     {
         try {
-
-            $sql = "SELECT RESEÑAS.*, USUARIOS.nombre AS autor_nombre 
-                FROM RESEÑAS 
-                INNER JOIN USUARIOS ON RESEÑAS.usuario_id = USUARIOS.Id_usuario";
+            $sql = "SELECT RESEÑAS.*, 
+                           USUARIOS.nombre AS autor_nombre,
+                           DESTINOS.nombre AS nombre_destino
+                    FROM RESEÑAS 
+                    INNER JOIN USUARIOS ON RESEÑAS.usuario_id = USUARIOS.Id_usuario
+                    INNER JOIN DESTINOS ON RESEÑAS.destinos_id = DESTINOS.Id_Destinos";
 
             $rtdo = $this->getConn()->query($sql);
             $reseñas = [];
@@ -165,5 +192,77 @@ class GestorPDO extends Connection
             error_log("Error en listarReseñas: " . $e->getMessage());
             return [];
         }
+    }
+    public function insertarReseña($destino_id, $usuario_id, $comentario, $valoracion)
+    {
+        try {
+            $sql = "INSERT INTO RESEÑAS (destinos_id, usuario_id, Comentarios, Valoración) 
+                VALUES (:dest_id, :user_id, :comen, :val)";
+            $stmt = $this->getConn()->prepare($sql);
+            $stmt->bindValue(':dest_id', $destino_id);
+            $stmt->bindValue(':user_id', $usuario_id);
+            $stmt->bindValue(':comen',   $comentario);
+            $stmt->bindValue(':val',      $valoracion);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+    //  FUNCIONES PARA ADMIN: DESTINOS 
+    public function eliminarDestino($id)
+    {
+        $sql = "DELETE FROM DESTINOS WHERE Id_Destinos = :id";
+        $stmt = $this->getConn()->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        return $stmt->execute();
+    }
+
+    public function obtenerDestinoPorId($id)
+    {
+        $sql = "SELECT * FROM DESTINOS WHERE Id_Destinos = :id";
+        $stmt = $this->getConn()->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function modificarDestino($id, $nombre, $pais, $continente, $descripcion)
+    {
+        $sql = "UPDATE DESTINOS SET nombre = :nom, país = :pais, continente = :cont, descripción = :desc WHERE Id_Destinos = :id";
+        $stmt = $this->getConn()->prepare($sql);
+        $stmt->bindValue(':nom', $nombre);
+        $stmt->bindValue(':pais', $pais);
+        $stmt->bindValue(':cont', $continente);
+        $stmt->bindValue(':desc', $descripcion);
+        $stmt->bindValue(':id', $id);
+        return $stmt->execute();
+    }
+
+    //  FUNCIONES PARA ADMIN: GUÍAS 
+    public function eliminarGuia($id)
+    {
+        $sql = "DELETE FROM GUIAS WHERE Id_guias = :id";
+        $stmt = $this->getConn()->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        return $stmt->execute();
+    }
+
+    public function obtenerGuiaPorId($id)
+    {
+        $sql = "SELECT * FROM GUIAS WHERE Id_guias = :id";
+        $stmt = $this->getConn()->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function modificarGuia($id, $titulo, $comentario)
+    {
+        $sql = "UPDATE GUIAS SET Titulo = :tit, Comentario = :com WHERE Id_guias = :id";
+        $stmt = $this->getConn()->prepare($sql);
+        $stmt->bindValue(':tit', $titulo);
+        $stmt->bindValue(':com', $comentario);
+        $stmt->bindValue(':id', $id);
+        return $stmt->execute();
     }
 }
