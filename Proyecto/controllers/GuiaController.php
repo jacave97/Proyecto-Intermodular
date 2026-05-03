@@ -258,7 +258,7 @@ class GuiaController
         exit;
     }
 
-    public function editarReseña()
+public function editarReseña()
     {
         if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
             header("Location: index.php?accion=reseñas");

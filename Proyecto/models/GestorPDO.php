@@ -265,4 +265,35 @@ class GestorPDO extends Connection
         $stmt->bindValue(':id', $id);
         return $stmt->execute();
     }
+
+    //  FUNCIONES PARA ADMIN: RESEÑAS
+    public function obtenerReseñaPorId($id)
+    {
+        $sql = "SELECT * FROM RESEÑAS WHERE Id_reseñas = :id";
+        $stmt = $this->getConn()->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function modificarReseña($id, $comentario, $valoracion)
+    {
+        $sql = "UPDATE RESEÑAS SET Comentarios = :com, Valoración = :val WHERE Id_reseñas = :id";
+        $stmt = $this->getConn()->prepare($sql);
+
+        // Forzamos el tipo de dato para evitar problemas
+        $stmt->bindValue(':com', $comentario);
+        $stmt->bindValue(':val', $valoracion, PDO::PARAM_INT);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+        $exito = $stmt->execute();
+    }
+
+    public function eliminarReseña($id)
+    {
+        $sql = "DELETE FROM RESEÑAS WHERE Id_reseñas = :id";
+        $stmt = $this->getConn()->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        return $stmt->execute();
+    }
 }

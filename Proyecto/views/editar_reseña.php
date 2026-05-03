@@ -4,7 +4,7 @@
 
 <form action="index.php?accion=editarReseña" method="POST">
     <input type="hidden" name="id_reseña" value="<?= $reseña['Id_reseñas'] ?>">
-
+    <label>Destino</label>
     <label>Comentario:</label><br>
     <textarea name="comentario" rows="4" required><?= $reseña['Comentarios'] ?></textarea><br><br>
 
