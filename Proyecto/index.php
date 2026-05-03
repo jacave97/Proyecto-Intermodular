@@ -4,7 +4,7 @@ require_once "autoload.php";
 session_start();
 
 $gestor           = new GestorPDO();
-$controller       = new GuiaController($gestor);
+$controller       = new Controller($gestor);
 $usuarioController = new UsuarioController($gestor);
 
 $accion = $_GET['accion'] ?? 'index';

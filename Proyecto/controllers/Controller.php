@@ -1,6 +1,6 @@
 <?php
 
-class GuiaController
+class Controller
 {
 
     protected $gestor;
