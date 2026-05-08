@@ -22,11 +22,12 @@
             <option value="usuario">Usuario</option>
             <option value="admin">Administrador</option>
         </select><br><br>
+        <p>¿Ya tienes cuenta? <a href="index.php?accion=login">Inicia sesión</a></p>    
 
         <button type="submit">Registrarse</button>
     </form>
 
-    <p>¿Ya tienes cuenta? <a href="index.php?accion=login">Inicia sesión</a></p>
+
 </section>
 
 <?php include __DIR__ . "/../_footer.php"; ?>

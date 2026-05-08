@@ -14,11 +14,12 @@
 
         <label>Contraseña:</label><br>
         <input type="password" name="password" required><br><br>
+        <p>¿No tienes cuenta? <a href="index.php?accion=registro">Regístrate</a></p>
 
         <button type="submit">Entrar</button>
     </form>
 
-    <p class="form-link">¿No tienes cuenta? <a href="index.php?accion=registro">Regístrate</a></p>
+
 
 </section>
 
