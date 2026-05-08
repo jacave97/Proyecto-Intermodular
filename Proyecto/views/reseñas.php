@@ -5,7 +5,6 @@
 
     <?php if (isset($_SESSION['usuario_id'])): ?>
         <div>
-            <h3>Escribe tu opinión</h3>
             <form action="index.php?accion=guardarReseña" method="POST">
 
                 <label>Destino:</label><br>

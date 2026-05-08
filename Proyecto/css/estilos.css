@@ -1,135 +1,213 @@
 
-body {
+* {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #F9F7F2;
-    color: #333333;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
+body {
+    background-color: #F9F7F2; 
+    color: #333333; 
+}
+
+/* 
+    Header
+*/
 header {
-    background-color: #2D4F1E;
-    color: white;
+    background-color: #2a4d25; 
+    color: #ffffff;
     text-align: center;
-    padding: 20px;
+    padding: 40px 20px;
 }
 
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.1rem;
+}
+
+/* 
+   nav
+*/
 nav {
     background-color: #BC8A5F;
+    padding: 15px 0;
     text-align: center;
-    padding: 10px;
 }
 
 nav a {
-    color: white;
-    margin: 10px;
+    color: #ffffff;
     text-decoration: none;
     font-weight: bold;
+    margin: 0 15px;
+    font-size: 1.05rem;
 }
 
-.titulo {
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* 
+   main
+ */
+main {
+    padding: 40px 20px;
+    min-height: 50vh; 
+}
+
+/* Títulos de las secciones */
+h2 {
     text-align: center;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: #333333; 
 }
 
-.grid {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-    padding: 20px;
+/* 
+   Tablas 
+*/
+table {
+    margin: 0 auto; 
+    border-collapse: collapse; 
+    width: 80%; 
+    max-width: 100%; 
+    background-color: #ffffff; 
+    margin-bottom: 50px; 
 }
 
-.card-img {
-    position: relative;
-    width: 300px;
-    height: 200px;
-    overflow: hidden;
-    border-radius: 10px;
-}
-
-.card-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    
-    padding: 15px;
+th, td {
+    border: 1px solid #888;
+    padding: 12px 15px; 
     text-align: center;
-    border-radius: 5px;
+    
+}
+
+th {
+    background-color: #e6e6e6; 
     font-weight: bold;
+    text-align: center;
 }
 
+
+
+/* 
+ Footer
+*/
 footer {
-    background-color: #2D4F1E;
-    color: white;
+    background-color: #2a4d25;
+    color: #ffffff;
     text-align: center;
-    padding: 10px;
-}
-.grid-viaje {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    padding: 20px;
+    padding: 25px 0;
+    margin-top: auto;
 }
 
-.card-viaje {
-    background-color: white;
-    border-radius: 10px;
-    padding: 20px;
-    width: 200px;
+/*
+   Contenedores de Formularios
+*/
+form {
+    background-color: #ffffff;
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+    padding: 30px;
+    border-radius: 5px;
+ 
+}
+
+/*
+   Títulos dentro de las vistas de formulario
+*/
+h1.form-title, h2 {
+    color: #2a4d25;
     text-align: center;
-
-    border: 1px solid #BC8A5F; /* borde fino elegante */
-
-    box-shadow: 0 0 5px rgba(0,0,0,0.2);
-    transition: transform 0.3s, border-color 0.3s;
+    margin-bottom: 25px;
 }
 
-.card-viaje:hover {
-    transform: scale(1.05);
-    border-color: #2D4F1E; /* verde bosque */
-}
-.swiper-container {
-    width: 100%;
-    padding: 20px 0;
-}
-
-.swiper-slide {
-    position: relative;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.swiper-slide img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-}
-
-.carrusel-title-wrapper {
-    position: absolute;
-    bottom: 60px;
-    left: 10px;
-    color: white;
-}
-
-.carrusel-title {
-    font-size: 18px;
+/* 
+   Etiquetas (Labels) y Textos
+*/
+form label {
+    display: block;
     font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
 }
 
-.swiper-slide-footer {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    color: white;
+/* Estilo para los pequeños enlaces dentro del form*/
+form a {
+    color: #b5865a;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+form a:hover {
+    text-decoration: underline;
+}
+
+/*
+   Campos de entrada (Inputs, Selects, Textareas)
+*/
+form input[type="text"],
+form input[type="number"],
+form select,
+form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+/* Para que la caja de texto (textarea) no sea enana por defecto */
+form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* 
+   Botón de Enviar (Submit)
+*/
+form input[type="submit"],
+form button[type="submit"] {
+    background-color: #2a4d25; 
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    width: 100%; 
+    margin-top: 10px;
+}
+
+/* Para que sea Responsive en moviles  */
+@media (max-width: 768px) {
+    header { 
+        padding: 15px; 
+    }
+    header h1 {
+         font-size: 1.5rem; 
+        }
+    nav a { 
+        margin: 5px 10px; 
+        font-size: 0.9rem; 
+        display: inline-block; 
+    }
+
+    /* Formularios*/
+    form { 
+        width: 100%; 
+        padding: 15px; 
+    }
+
+    /* Tablas con scroll horizontal*/
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
 }
